@@ -1,4 +1,4 @@
-all : pcap_test
+all : send_arp
 
 pcap_test: main.o
 	g++ -g -o send_arp send_arp.o -lpcap
