@@ -510,6 +510,7 @@ int main(int argc, char* argv[]) {
 	while(1) {
 		sleep(1);
 		printf("-> Victim의 Gateway MAC Address를 변조중입니다...\n");
+		printf("-> 이건 모두 다 길길 멘토님께서 시키신 입니다. 전 아무 잘못없어요 T^T \n");
 		if(pcap_sendpacket(handle, (const u_char *)infection_packet, 42) != 0){
 			printf("\nError sending the packet: \n");
 			return 1;
